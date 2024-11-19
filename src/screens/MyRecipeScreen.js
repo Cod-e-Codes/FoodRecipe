@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: "#4F75FF",
-    padding: wp(.7),
+    paddingVertical: hp(1.5),
+    paddingHorizontal: wp(5),
     alignItems: "center",
     borderRadius: 5,
-    width: 300,
-    marginLeft: 500
-    // marginBottom: hp(2),
+    alignSelf: "center",
+    marginBottom: hp(2),
   },
   addButtonText: {
     color: "#fff",

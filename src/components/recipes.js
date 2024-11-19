@@ -1,31 +1,39 @@
 import { View, Text, Pressable, Image, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp,} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp, } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Recipe({ categories, foods }) {
   const navigation = useNavigation();
 
   const renderItem = ({ item, index }) => (
-<ArticleCard item={item} index={index} navigation={navigation} />
+    <ArticleCard item={item} index={index} navigation={navigation} />
   );
 
   return (
-    <View style={styles.container}>
-      <View testID="recipesDisplay">
-            
-      </View>
-    </View>
+    <FlatList
+      data={foods}
+      numColumns={2}
+      keyExtractor={(item) => item.idFood.toString()}
+      renderItem={renderItem}
+      columnWrapperStyle={styles.columnWrapper}
+      contentContainerStyle={styles.listContent}
+    />
   );
 }
 
 const ArticleCard = ({ item, index, navigation }) => {
   return (
-    <View
-      style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay"
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={() => navigation.navigate("RecipeDetail", { recipe: item })}
     >
-   
-    </View>
+      <Image source={{ uri: item.recipeImage }} style={styles.articleImage} />
+      <Text style={styles.articleText}>{item.recipeName}</Text>
+      <Text style={styles.articleDescription}>
+        {item.cookingDescription.slice(0, 50)}...
+      </Text>
+    </TouchableOpacity>
   );
 };
 
@@ -45,12 +53,11 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     justifyContent: "center",
-    marginBottom: hp(1.5),
+    margin: hp(1.5),
     flex: 1, // Allows cards to grow and fill space evenly
   },
   articleImage: {
-    width: "100%",
-   
+    height: hp(25), // Adjust the height as necessary
     borderRadius: 35,
     backgroundColor: "rgba(0, 0, 0, 0.05)", // bg-black/5
   },

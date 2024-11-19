@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: "#4F75FF",
-    paddingVertical: hp(1.5),
-    paddingHorizontal: wp(5),
+    paddingVertical: hp(1.2),
+    paddingHorizontal: wp(3),
     alignItems: "center",
     borderRadius: 5,
     alignSelf: "center",
